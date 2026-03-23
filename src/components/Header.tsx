@@ -13,17 +13,21 @@ import {
   Award,
   Briefcase,
   BookOpen,
-  LogOut
+  LogOut,
+  Moon,
+  Sun
 } from 'lucide-react';
 
 interface HeaderProps {
   currentSection: string;
   onNavigate: (section: any) => void;
   hasProfile: boolean;
+  darkMode: boolean;
+  onToggleDarkMode: () => void;
   onSignOut: () => void;
 }
 
-export function Header({ currentSection, onNavigate, hasProfile, onSignOut }: HeaderProps) {
+export function Header({ currentSection, onNavigate, hasProfile, darkMode, onToggleDarkMode, onSignOut }: HeaderProps) {
   const navItems = [
     { id: 'landing', label: 'Home', icon: GraduationCap },
     { id: 'chatbot', label: 'AI Assistant', icon: Bot },
@@ -71,6 +75,19 @@ export function Header({ currentSection, onNavigate, hasProfile, onSignOut }: He
               Profile Complete
             </Badge>
           )}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onToggleDarkMode}
+            className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300 hover:bg-accent"
+            title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {darkMode ? (
+              <Sun className="h-[1.2rem] w-[1.2rem] text-yellow-400 transition-transform duration-300 rotate-0" />
+            ) : (
+              <Moon className="h-[1.2rem] w-[1.2rem] text-slate-700 transition-transform duration-300 rotate-0" />
+            )}
+          </Button>
           <Button
             variant={currentSection === 'dashboard' ? "default" : "outline"}
             size="sm"

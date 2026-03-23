@@ -290,25 +290,27 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-primary text-primary-foreground">
-        <div className="container mx-auto text-center max-w-3xl">
+      <section className="py-16 px-4 bg-slate-950 dark:bg-slate-900 text-white relative overflow-hidden">
+        {/* Subtle background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+        
+        <div className="container mx-auto text-center max-w-3xl relative z-10">
           <div className="flex justify-center mb-6">
             <div className="relative">
-              <Bot className="h-12 w-12 text-primary-foreground" />
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-primary"></div>
+              <Bot className="h-12 w-12 text-blue-400" />
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-950 dark:border-slate-900"></div>
             </div>
           </div>
-          <h2 className="mb-4 text-white">Ready to Shape Your Future?</h2>
-          <p className="mb-8 text-primary-foreground/90">
+          <h2 className="mb-4 text-3xl md:text-4xl font-bold text-white">Ready to Shape Your Future?</h2>
+          <p className="mb-8 text-slate-300 text-lg">
             Start your personalized career guidance journey today. Chat with our AI assistant 
             for instant advice, take assessments, explore colleges, and plan your educational path.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              variant="secondary"
               onClick={() => onNavigate('chatbot')}
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white border-0"
             >
               <Bot className="h-5 w-5" />
               <span>Chat with AI Assistant</span>
@@ -317,7 +319,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
               size="lg" 
               variant="outline"
               onClick={() => onNavigate('quiz')}
-              className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10"
+              className="bg-transparent border-slate-700 hover:border-slate-500 text-white hover:bg-slate-800"
             >
               <Target className="h-5 w-5 mr-2" />
               <span>Take Assessment</span>

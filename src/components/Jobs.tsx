@@ -202,207 +202,294 @@ export function Jobs() {
   if (selectedJob) {
     const j = selectedJob;
     return (
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
-        <Button variant="outline" onClick={() => setSelectedJob(null)} className="mb-6 group">
-          <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <style dangerouslySetInnerHTML={{__html: `
+          /* ─── Liquid Glass Buttons ─── */
+          .liquid-glass-tab {
+            background-color: rgba(219, 234, 254, 0.4) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(191, 219, 254, 0.8) !important;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1) !important;
+            color: #1d4ed8 !important;
+            border-radius: 0.75rem !important;
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+            transition: all 0.3s ease-out !important;
+            cursor: pointer !important;
+          }
+          .liquid-glass-tab:hover {
+            background-color: rgba(191, 219, 254, 0.6) !important;
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2) !important;
+            transform: translateY(-4px) !important;
+          }
+          .liquid-glass-tab[data-state="active"] {
+            background-color: rgba(147, 197, 253, 0.5) !important;
+            border-color: rgba(96, 165, 250, 0.8) !important;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8), 0 10px 15px -3px rgba(59,130,246,0.3) !important;
+          }
+          .liquid-glass-btn {
+            background-color: rgba(219, 234, 254, 0.35) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(191, 219, 254, 0.7) !important;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.08) !important;
+            color: #1d4ed8 !important;
+            border-radius: 0.75rem !important;
+            transition: all 0.3s ease-out !important;
+            cursor: pointer !important;
+          }
+          .liquid-glass-btn:hover {
+            background-color: rgba(191, 219, 254, 0.55) !important;
+            box-shadow: 0 12px 20px -4px rgba(59, 130, 246, 0.22) !important;
+            transform: translateY(-4px) !important;
+          }
+          .liquid-glass-btn:disabled {
+            opacity: 0.5 !important;
+            transform: none !important;
+            cursor: not-allowed !important;
+          }
+          .liquid-glass-btn-primary {
+            background: linear-gradient(180deg, rgba(238,242,255,1) 0%, rgba(224,231,255,1) 100%) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(199, 210, 254, 0.8) !important;
+            box-shadow: 0 4px 14px 0 rgba(79,70,229,0.15) !important;
+            color: #4f46e5 !important;
+            border-radius: 1rem !important;
+            transition: all 0.3s ease-out !important;
+            cursor: pointer !important;
+          }
+          .liquid-glass-btn-primary:hover {
+            box-shadow: 0 20px 40px -10px rgba(79,70,229,0.4) !important;
+            transform: translateY(-4px) scale(1.02) !important;
+          }
+          .liquid-glass-btn-active {
+            background-color: rgba(99, 102, 241, 0.15) !important;
+            border-color: rgba(99, 102, 241, 0.5) !important;
+            color: #4338ca !important;
+            font-weight: 700 !important;
+          }
+          .dark .liquid-glass-tab {
+            background-color: rgba(30, 58, 138, 0.4) !important;
+            border-color: rgba(29, 78, 216, 0.5) !important;
+            color: #93c5fd !important;
+          }
+          .dark .liquid-glass-tab[data-state="active"] {
+            background-color: rgba(30, 58, 138, 0.8) !important;
+          }
+          .dark .liquid-glass-btn {
+            background-color: rgba(30, 58, 138, 0.3) !important;
+            border-color: rgba(29, 78, 216, 0.4) !important;
+            color: #93c5fd !important;
+          }
+          .dark .liquid-glass-btn:hover {
+            background-color: rgba(30, 58, 138, 0.5) !important;
+          }
+          .dark .liquid-glass-btn-primary {
+            background: linear-gradient(180deg, rgba(30,58,138,0.6) 0%, rgba(30,64,175,0.5) 100%) !important;
+            border-color: rgba(59, 130, 246, 0.4) !important;
+            color: #93c5fd !important;
+          }
+          .dark .liquid-glass-btn-active {
+            background-color: rgba(99, 102, 241, 0.3) !important;
+            color: #a5b4fc !important;
+          }
+        `}} />
+
+        <Button variant="ghost" onClick={() => setSelectedJob(null)} className="liquid-glass-btn mb-6 font-semibold">
+          <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Jobs
         </Button>
 
-        {/* Hero Interactive */}
-        <div className="relative rounded-2xl overflow-hidden mb-8 border border-border shadow-md hover:shadow-xl transition-all duration-300 p-6 md:p-8 flex flex-col md:flex-row md:items-start justify-between gap-6 bg-card/80 backdrop-blur-xl text-card-foreground group/hero">
-          {/* subtle animated decorative background */}
-          <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-50 dark:bg-indigo-900/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none group-hover/hero:scale-110 group-hover/hero:bg-indigo-100 dark:group-hover/hero:bg-indigo-900/20 transition-all duration-700 ease-in-out" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none group-hover/hero:scale-110 transition-all duration-700 ease-in-out delay-150" />
-
-          <div className="relative z-10 flex-1">
-            {/* Badges row */}
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <Badge variant="secondary" className="px-2.5 py-0.5 bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300">
-                {j.type}
-              </Badge>
-              <Badge variant="outline" className="px-2.5 py-0.5 font-medium">
-                {j.source}
-              </Badge>
-              {j.isRemote && (
-                <Badge className="px-2.5 py-0.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 hover:bg-emerald-100 border-0">
-                  <Globe className="h-3 w-3 mr-1" /> Remote
-                </Badge>
-              )}
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+          {/* LEFT COLUMN: Hero + Details */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
             
-            {/* Title with Gradient on Hover */}
-            <h1 className="text-2xl md:text-3xl font-bold mb-3 leading-tight transition-colors duration-300 group-hover/hero:bg-gradient-to-r group-hover/hero:from-indigo-600 group-hover/hero:to-blue-600 group-hover/hero:bg-clip-text group-hover/hero:text-transparent">
-              {j.title}
-            </h1>
-            
-            {/* Metadata row */}
-            <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-sm text-muted-foreground">
-              <span className="flex items-center text-foreground font-medium group/item hover:text-indigo-600 transition-colors">
-                <Building className="h-4 w-4 mr-1.5 text-indigo-500 group-hover/item:scale-110 transition-transform" />
-                {j.company}
-              </span>
-              <span className="flex items-center">
-                <MapPin className="h-4 w-4 mr-1.5 text-rose-500" />
-                {j.location}
-              </span>
-              <span className="flex items-center">
-                <Clock className="h-4 w-4 mr-1.5 text-amber-500" />
-                Posted {timeAgo(j.postedDate)}
-              </span>
-            </div>
-          </div>
+            {/* HERO CARD */}
+            <div className="bg-card rounded-[28px] p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] border border-slate-100 dark:border-slate-800 flex flex-col relative overflow-hidden">
+              
+              <div className="flex flex-col sm:flex-row gap-5 items-start">
+                {/* Big Square Icon Box */}
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 shadow-sm bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-100 dark:border-indigo-800/50">
+                   <Building className="w-8 h-8" style={{ color: '#4f46e5' }} />
+                </div>
 
-          {/* Actions - Animated Apply Button */}
-          <div className="relative z-10 flex flex-col items-stretch sm:items-end gap-2 shrink-0 w-full md:w-auto mt-4 md:mt-0">
-            <a href={j.applyUrl} target="_blank" rel="noopener noreferrer" className="block w-full group/apply">
-              <Button 
-                size="lg" 
-                className="w-full shadow-lg font-semibold text-base py-6 transition-all duration-300 transform group-hover/apply:-translate-y-1 group-hover/apply:shadow-blue-500/30 group-hover/apply:shadow-xl cursor-pointer overflow-hidden relative"
-                style={{ backgroundColor: '#2563eb', color: '#ffffff' }}
-              >
-                {/* Shine effect absolute overlay */}
-                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover/apply:animate-[shimmer_1.5s_infinite]" />
-                <ExternalLink className="h-5 w-5 mr-2 group-hover/apply:translate-x-1 group-hover/apply:-translate-y-1 transition-transform" />
-                Apply on {j.source}
-              </Button>
-            </a>
-            <p className="text-xs text-muted-foreground text-center sm:text-right max-w-[250px]">
-              You will be securely redirected to {j.source}.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Description */}
-            <Card className="border border-border/50 shadow-md hover:shadow-lg transition-shadow duration-300 bg-card/95 backdrop-blur">
-              <CardHeader className="border-b border-border/30 pb-4 mb-4">
-                <CardTitle className="text-lg flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-3 text-indigo-600">
-                    <Briefcase className="h-4 w-4" />
-                  </div>
-                  Job Description
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {detailLoading ? (
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Loader2 className="h-4 w-4 animate-spin" /> Loading full description...
-                  </div>
-                ) : (
-                  <div
-                    className="prose prose-sm dark:prose-invert max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-1 [&_p]:mb-3 [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mt-4 [&_h2]:mb-2 [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mt-3 [&_h3]:mb-1 [&_strong]:font-semibold"
-                    dangerouslySetInnerHTML={{ __html: j.description || 'No description available for this role.' }}
-                  />
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Tags */}
-            {(j.tags?.length || 0) > 0 && (
-              <Card className="border border-border/50 shadow-md hover:shadow-lg transition-shadow duration-300 bg-card/95 backdrop-blur group/tags">
-                <CardHeader className="border-b border-border/30 pb-4 mb-4">
-                  <CardTitle className="flex items-center text-lg">
-                    <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-3 text-indigo-600 group-hover/tags:scale-110 transition-transform">
-                      <Tag className="h-4 w-4" />
+                {/* Badges & Title */}
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <div className="px-3 py-1 font-semibold rounded-full text-xs bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400">
+                      {j.type}
                     </div>
-                    Skills & Requirements
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2.5">
-                    {(j.tags || []).map((tag, i) => (
-                      <Badge key={i} className="bg-indigo-50/80 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300 py-1.5 px-3 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 hover:scale-105 transition-all text-sm font-medium border border-indigo-100 dark:border-indigo-800/50">
-                        {tag}
-                      </Badge>
-                    ))}
+                    <div className="px-3 py-1 font-semibold rounded-full text-xs flex items-center gap-1.5 bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
+                       <ExternalLink className="w-3 h-3" /> {j.source}
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
-            )}
+                  
+                  <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                    {j.title}
+                  </h1>
+
+                  <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">
+                    <span className="flex items-center">
+                      <Building className="h-4 w-4 mr-1.5 shrink-0" />
+                      {j.company}
+                    </span>
+                    <span className="flex items-center">
+                      <MapPin className="h-4 w-4 mr-1.5 shrink-0" />
+                      {j.location}
+                    </span>
+                    <span className="flex items-center">
+                      <Clock className="h-4 w-4 mr-1.5 shrink-0" />
+                      Posted {timeAgo(j.postedDate)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Apply Button */}
+              <div className="mt-8">
+                  <a href={j.applyUrl} target="_blank" rel="noopener noreferrer" className="block w-full group/apply">
+                    <button 
+                      className="liquid-glass-btn-primary w-full h-14 font-bold text-base flex items-center justify-center"
+                    >
+                      <ExternalLink className="h-5 w-5 mr-2" />
+                      Apply on {j.source}
+                    </button>
+                 </a>
+                 <div className="mt-4 flex justify-center">
+                   <p className="text-center text-xs font-medium text-slate-500">
+                      You will be securely redirected to {j.source}.
+                   </p>
+                 </div>
+              </div>
+            </div>
+
+            {/* TABBED DETAILS CARD */}
+            <div className="bg-card rounded-[28px] p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] border border-slate-100 dark:border-slate-800">
+              <Tabs defaultValue="description" className="w-full">
+
+                <TabsList className="grid w-full grid-cols-2 bg-transparent h-auto p-0 gap-4 mb-6">
+                  <TabsTrigger 
+                    value="description" 
+                    className="liquid-glass-tab font-semibold cursor-pointer"
+                  >
+                    <Briefcase className="w-4 h-4 mr-2" /> Job Description
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="overview" 
+                    className="liquid-glass-tab font-semibold cursor-pointer lg:hidden"
+                  >
+                    <Zap className="w-4 h-4 mr-2" /> Quick Overview
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="skills" 
+                    className="hidden lg:flex liquid-glass-tab font-semibold cursor-pointer"
+                  >
+                    <Tag className="w-4 h-4 mr-2" /> Skills
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="description" className="mt-0 focus-visible:outline-none">
+                  {detailLoading ? (
+                    <div className="flex items-center gap-2 text-slate-500">
+                      <Loader2 className="h-4 w-4 animate-spin" /> Loading full description...
+                    </div>
+                  ) : (
+                    <div
+                      className="prose prose-sm dark:prose-invert max-w-none prose-p:text-slate-600 dark:prose-p:text-slate-300 prose-headings:text-slate-900 dark:prose-headings:text-slate-100 prose-li:text-slate-600 dark:prose-li:text-slate-300 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-2 [&_p]:mb-4 [&_h2]:text-base [&_h2]:font-bold [&_h2]:mt-6 [&_h2]:mb-3 [&_h3]:text-sm [&_h3]:font-bold [&_h3]:mt-4 [&_h3]:mb-2 [&_strong]:font-bold"
+                      dangerouslySetInnerHTML={{ __html: j.description || 'No description available for this role.' }}
+                    />
+                  )}
+                </TabsContent>
+
+                <TabsContent value="overview" className="mt-0 focus-visible:outline-none lg:hidden">
+                   {/* Mobile overview content goes here (matches sidebar) */}
+                   <p className="text-slate-500 text-sm">Please see the Quick Overview section below.</p>
+                </TabsContent>
+
+                <TabsContent value="skills" className="mt-0 focus-visible:outline-none hidden lg:block">
+                  <div className="flex flex-wrap gap-2.5">
+                    {(j.tags && j.tags.length > 0) ? (
+                      j.tags.map((tag, i) => (
+                        <Badge key={i} className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 py-1.5 px-4 hover:bg-slate-200 transition-colors text-sm font-semibold border-0 rounded-lg shadow-sm">
+                          {tag}
+                        </Badge>
+                      ))
+                    ) : (
+                      <p className="text-slate-500 text-sm">No specific skills listed for this role.</p>
+                    )}
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <Card className="border border-border/50 shadow-md hover:shadow-lg transition-shadow duration-300 bg-card/95 backdrop-blur sticky top-24">
-              <CardHeader className="border-b border-border/30 pb-4 mb-4">
-                <CardTitle className="text-lg flex items-center">
-                   <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3 text-blue-600">
-                    <Zap className="h-4 w-4" />
-                  </div>
-                  Quick Overview
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-5">
-                <div className="group/stat flex items-start gap-3 p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
-                  <div className="mt-0.5 w-8 h-8 rounded-md bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 shrink-0 group-hover/stat:scale-110 transition-transform">
-                    <DollarSign className="h-4 w-4" />
+          {/* RIGHT COLUMN: Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="bg-card rounded-[28px] p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] border border-slate-100 dark:border-slate-800 sticky top-24 flex flex-col pt-8">
+              
+              <h2 className="flex items-center text-slate-800 dark:text-slate-100 font-bold text-lg mb-8">
+                <Zap className="w-5 h-5 text-indigo-500 mr-2 shrink-0" /> 
+                Quick Overview
+              </h2>
+
+              <div className="space-y-6 flex-1">
+                {/* Compensation */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400">
+                    <DollarSign className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Compensation</p>
-                    <p className="text-base font-medium">{j.salary}</p>
+                    <p className="text-[13px] font-semibold text-slate-500 mb-0.5">Compensation</p>
+                    <p className="font-bold text-slate-900 dark:text-slate-100 text-base">{j.salary || 'Not disclosed'}</p>
                   </div>
                 </div>
                 
-                <div className="group/stat flex items-start gap-3 p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
-                  <div className="mt-0.5 w-8 h-8 rounded-md bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 shrink-0 group-hover/stat:scale-110 transition-transform">
-                    <Briefcase className="h-4 w-4" />
+                {/* Job Type */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
+                    <Briefcase className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Job Type</p>
-                    <Badge className={`mt-1 ${typeColor(j.type)} shadow-sm`}>{j.type}</Badge>
+                    <p className="text-[13px] font-semibold text-slate-500 mb-0.5">Job Type</p>
+                    <p className="font-bold text-slate-900 dark:text-slate-100 text-base">{j.type}</p>
                   </div>
                 </div>
 
-                <div className="group/stat flex items-start gap-3 p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
-                  <div className="mt-0.5 w-8 h-8 rounded-md bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 shrink-0 group-hover/stat:scale-110 transition-transform">
-                    <Tag className="h-4 w-4" />
+                {/* Category */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-purple-50 text-purple-600 dark:bg-purple-950/40 dark:text-purple-400">
+                    <Tag className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Category</p>
-                    <p className="text-sm font-medium mt-1">{j.category}</p>
+                    <p className="text-[13px] font-semibold text-slate-500 mb-0.5">Category</p>
+                    <p className="font-bold text-slate-900 dark:text-slate-100 text-base">{(j.category?.length || 0) > 25 ? j.category?.substring(0, 25) + '...' : j.category}</p>
                   </div>
                 </div>
                 
-                <div className="group/stat flex items-start gap-3 p-2 -m-2 rounded-lg hover:bg-muted/50 transition-colors">
-                  <div className="mt-0.5 w-8 h-8 rounded-md bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center text-rose-600 shrink-0 group-hover/stat:scale-110 transition-transform">
-                    <Calendar className="h-4 w-4" />
+                {/* Posted On */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-orange-50 text-orange-600 dark:bg-orange-950/40 dark:text-orange-400">
+                    <Calendar className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Posted On</p>
-                    <p className="text-sm font-medium mt-1">{new Date(j.postedDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+                    <p className="text-[13px] font-semibold text-slate-500 mb-0.5">Posted On</p>
+                    <p className="font-bold text-slate-900 dark:text-slate-100 text-base">
+                      {new Date(j.postedDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
+                    </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
 
-            <Card className="border border-border/50 shadow-md hover:shadow-lg transition-shadow duration-300 bg-card/95 backdrop-blur group/tips">
-              <CardHeader className="border-b border-border/30 pb-4 mb-4">
-                <CardTitle className="text-lg flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mr-3 text-orange-600 group-hover/tips:scale-110 transition-transform">
-                    <CheckCircle className="h-4 w-4" />
-                  </div>
-                  Application Tips
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 text-sm">
-                  <div className="p-3 bg-muted/50 rounded-lg">
-                    <p className="font-medium mb-1">💼 Tailor Your Resume</p>
-                    <p className="text-muted-foreground">Customize your resume to match the job requirements.</p>
-                  </div>
-                  <div className="p-3 bg-muted/50 rounded-lg">
-                    <p className="font-medium mb-1">📝 Write a Cover Letter</p>
-                    <p className="text-muted-foreground">Explain why you're the perfect fit for this role.</p>
-                  </div>
-                  <div className="p-3 bg-muted/50 rounded-lg">
-                    <p className="font-medium mb-1">🎯 Research the Company</p>
-                    <p className="text-muted-foreground">Learn about the company culture and values.</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              {/* Save Job Button */}
+              <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800/50">
+                 <Button variant="outline" className="w-full h-12 rounded-xl border-slate-200 dark:border-slate-700 bg-card text-slate-700 dark:text-slate-200 font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.1)] cursor-pointer">
+                    Save Job
+                 </Button>
+              </div>
+              
+            </div>
           </div>
         </div>
       </div>
@@ -414,6 +501,79 @@ export function Jobs() {
   // ══════════════════════════════════════════════════════════════════════
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <style dangerouslySetInnerHTML={{__html: `
+        .liquid-glass-tab {
+          background-color: rgba(219, 234, 254, 0.4) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(191, 219, 254, 0.8) !important;
+          box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1) !important;
+          color: #1d4ed8 !important;
+          border-radius: 0.75rem !important;
+          padding-top: 0.75rem !important;
+          padding-bottom: 0.75rem !important;
+          transition: all 0.3s ease-out !important;
+          cursor: pointer !important;
+        }
+        .liquid-glass-tab:hover {
+          background-color: rgba(191, 219, 254, 0.6) !important;
+          box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2) !important;
+          transform: translateY(-4px) !important;
+        }
+        .liquid-glass-tab[data-state="active"] {
+          background-color: rgba(147, 197, 253, 0.5) !important;
+          border-color: rgba(96, 165, 250, 0.8) !important;
+          box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8), 0 10px 15px -3px rgba(59,130,246,0.3) !important;
+        }
+        .liquid-glass-btn {
+          background-color: rgba(219, 234, 254, 0.35) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(191, 219, 254, 0.7) !important;
+          box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.08) !important;
+          color: #1d4ed8 !important;
+          border-radius: 0.75rem !important;
+          transition: all 0.3s ease-out !important;
+          cursor: pointer !important;
+        }
+        .liquid-glass-btn:hover {
+          background-color: rgba(191, 219, 254, 0.55) !important;
+          box-shadow: 0 12px 20px -4px rgba(59, 130, 246, 0.22) !important;
+          transform: translateY(-4px) !important;
+        }
+        .liquid-glass-btn:disabled {
+          opacity: 0.5 !important;
+          transform: none !important;
+          cursor: not-allowed !important;
+        }
+        .liquid-glass-btn-active {
+          background-color: rgba(99, 102, 241, 0.15) !important;
+          border-color: rgba(99, 102, 241, 0.5) !important;
+          color: #4338ca !important;
+          font-weight: 700 !important;
+        }
+        .dark .liquid-glass-tab {
+          background-color: rgba(30, 58, 138, 0.4) !important;
+          border-color: rgba(29, 78, 216, 0.5) !important;
+          color: #93c5fd !important;
+        }
+        .dark .liquid-glass-tab[data-state="active"] {
+          background-color: rgba(30, 58, 138, 0.8) !important;
+        }
+        .dark .liquid-glass-btn {
+          background-color: rgba(30, 58, 138, 0.3) !important;
+          border-color: rgba(29, 78, 216, 0.4) !important;
+          color: #93c5fd !important;
+        }
+        .dark .liquid-glass-btn:hover {
+          background-color: rgba(30, 58, 138, 0.5) !important;
+        }
+        .dark .liquid-glass-btn-active {
+          background-color: rgba(99, 102, 241, 0.3) !important;
+          color: #a5b4fc !important;
+        }
+      `}} />
+
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
         <div>
@@ -445,15 +605,15 @@ export function Jobs() {
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full mb-6">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="all">
+          <TabsTrigger value="all" className="liquid-glass-tab font-semibold">
             <Briefcase className="h-4 w-4 mr-2" />
             All Jobs
           </TabsTrigger>
-          <TabsTrigger value="remote">
+          <TabsTrigger value="remote" className="liquid-glass-tab font-semibold">
             <Globe className="h-4 w-4 mr-2" />
             Remote Only
           </TabsTrigger>
-          <TabsTrigger value="recent">
+          <TabsTrigger value="recent" className="liquid-glass-tab font-semibold">
             <Zap className="h-4 w-4 mr-2" />
             Latest
           </TabsTrigger>
@@ -461,7 +621,7 @@ export function Jobs() {
       </Tabs>
 
       {/* Search & Filters */}
-      <Card className="border border-border/50 shadow-md hover:shadow-lg transition-shadow duration-300 bg-card/95 backdrop-blur mb-6">
+      <Card className="bg-card rounded-[28px] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] mb-6 overflow-visible">
         <CardContent className="pt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="relative lg:col-span-2">
@@ -521,7 +681,7 @@ export function Jobs() {
                   <X className="h-3 w-3 cursor-pointer" onClick={() => setTypeFilter('all')} />
                 </Badge>
               )}
-              <Button variant="ghost" size="sm" onClick={clearFilters} className="text-xs h-7">Clear all</Button>
+              <Button variant="ghost" size="sm" onClick={clearFilters} className="liquid-glass-btn text-xs h-7">Clear all</Button>
             </div>
           )}
         </CardContent>
@@ -532,7 +692,7 @@ export function Jobs() {
         <Card className="mb-6 border-red-200 bg-red-50 dark:bg-red-950/20 dark:border-red-900">
           <CardContent className="pt-6 flex items-center justify-between">
             <p className="text-red-600 dark:text-red-400">{error}</p>
-            <Button variant="outline" size="sm" onClick={() => fetchJobs(pagination.page)}>
+            <Button variant="outline" size="sm" onClick={() => fetchJobs(pagination.page)} className="liquid-glass-btn">
               <RefreshCw className="h-4 w-4 mr-2" /> Retry
             </Button>
           </CardContent>
@@ -575,12 +735,12 @@ export function Jobs() {
 
       {/* No results */}
       {!loading && jobs.length === 0 && !error && (
-        <Card className="border border-border/50 shadow-md bg-card/80 backdrop-blur">
+        <Card className="bg-card rounded-[28px] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)]">
           <CardContent className="pt-12 pb-12 text-center">
             <Briefcase className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" />
             <h3 className="text-lg font-semibold mb-2">No jobs found</h3>
             <p className="text-muted-foreground mb-4">Try adjusting your search or filters</p>
-            {hasFilters && <Button variant="outline" onClick={clearFilters}>Clear all filters</Button>}
+            {hasFilters && <Button variant="outline" onClick={clearFilters} className="liquid-glass-btn font-semibold">Clear all filters</Button>}
           </CardContent>
         </Card>
       )}
@@ -590,12 +750,12 @@ export function Jobs() {
         {jobs.map((job) => (
           <Card
             key={job.id}
-            className="group border border-border/50 shadow-sm hover:shadow-xl transition-all duration-300 bg-card/90 backdrop-blur-sm cursor-pointer hover:-translate-y-1 relative overflow-hidden"
+            className="group bg-card rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-[0_4px_20px_rgb(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)] cursor-pointer hover:-translate-y-2 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.4)] transition-all duration-300 ease-out relative overflow-hidden"
             onClick={() => openJobDetail(job)}
             id={`job-card-${job.id}`}
           >
             {/* subtle animated hover background for job card */}
-            <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-50 dark:bg-indigo-900/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none group-hover:scale-150 transition-all duration-700 ease-in-out opacity-0 group-hover:opacity-100" />
+            <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-50 dark:bg-indigo-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none group-hover:scale-150 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-500/20 transition-all duration-700 ease-in-out opacity-0 group-hover:opacity-100" />
             
             <CardContent className="pt-6 relative z-10">
               <div className="flex items-start gap-4">
@@ -604,7 +764,7 @@ export function Jobs() {
                   <img
                     src={job.companyLogo}
                     alt={job.company}
-                    className="w-12 h-12 rounded-xl object-contain bg-white border border-indigo-100 dark:border-indigo-800/50 flex-shrink-0 group-hover:scale-110 transition-transform shadow-sm"
+                    className="w-12 h-12 rounded-xl object-contain bg-card border border-indigo-100 dark:border-indigo-800/50 flex-shrink-0 group-hover:scale-110 transition-transform shadow-sm"
                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
                 ) : (
@@ -655,12 +815,12 @@ export function Jobs() {
                   <div className="flex items-center justify-between group/tags">
                     <div className="flex flex-wrap gap-1">
                       {(job.tags || []).slice(0, 4).map((tag, i) => (
-                        <Badge key={i} variant="outline" className="text-[10px] py-0.5 bg-background border-border/50 group-hover/tags:border-indigo-200 dark:group-hover/tags:border-indigo-800 transition-colors">
+                        <Badge key={i} variant="outline" className="text-[10px] py-0.5 bg-slate-50 border-slate-200 dark:bg-slate-800/50 dark:border-slate-700 group-hover/tags:border-indigo-200 dark:group-hover/tags:border-indigo-800 transition-colors text-slate-600 dark:text-slate-300 font-medium">
                           {tag}
                         </Badge>
                       ))}
                       {(job.tags?.length || 0) > 4 && (
-                        <Badge variant="outline" className="text-[10px] py-0.5 bg-background border-border/50 group-hover/tags:border-indigo-200 dark:group-hover/tags:border-indigo-800 transition-colors">+{(job.tags?.length || 0) - 4}</Badge>
+                        <Badge variant="outline" className="text-[10px] py-0.5 bg-slate-50 border-slate-200 dark:bg-slate-800/50 dark:border-slate-700 group-hover/tags:border-indigo-200 dark:group-hover/tags:border-indigo-800 transition-colors text-slate-600 dark:text-slate-300 font-medium">+{(job.tags?.length || 0) - 4}</Badge>
                       )}
                     </div>
                     <div className="flex items-center gap-3 text-xs text-muted-foreground flex-shrink-0 group-hover:text-foreground/70 transition-colors">
@@ -685,6 +845,7 @@ export function Jobs() {
             size="sm"
             disabled={pagination.page <= 1}
             onClick={() => fetchJobs(pagination.page - 1)}
+            className="liquid-glass-btn font-semibold"
           >
             <ChevronLeft className="h-4 w-4 mr-1" /> Previous
           </Button>
@@ -700,7 +861,7 @@ export function Jobs() {
                   key={pageNum}
                   variant={pageNum === pagination.page ? 'default' : 'outline'}
                   size="sm"
-                  className="w-9 h-9"
+                  className={`w-9 h-9 ${pageNum === pagination.page ? 'liquid-glass-btn-active liquid-glass-btn' : 'liquid-glass-btn'}`}
                   onClick={() => fetchJobs(pageNum)}
                 >
                   {pageNum}
@@ -713,6 +874,7 @@ export function Jobs() {
             size="sm"
             disabled={pagination.page >= pagination.totalPages}
             onClick={() => fetchJobs(pagination.page + 1)}
+            className="liquid-glass-btn font-semibold"
           >
             Next <ChevronRight className="h-4 w-4 ml-1" />
           </Button>
